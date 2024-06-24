@@ -28,19 +28,17 @@ The following tools are necessary to develop the application:
 The following tools were used in the construction of the project:
 
 - C#
-- Visual Studio
 - Data Bases - MySQL
 
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
-![VisualStudio](https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white)
+
 ![SQLServer](https://img.shields.io/badge/Microsoft_SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
 
 ### Tools
 
-![Intellij Badge](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
-![Insomnia Badge](https://img.shields.io/badge/Insomnia-5849be?style=for-the-badge&logo=Insomnia&logoColor=white)
+- Visual Studio
 
----
+## ![VisualStudio](https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white)
 
 ## 📁 Diagram
 
@@ -52,7 +50,6 @@ The following tools were used in the construction of the project:
   <img alt="ClassDiagram" style="width: 700px; margin: 0 10px" 
        src="SeriesManager/Modeling/ClassDiagram.jpg">
 </p>
-
 
 ---
 
