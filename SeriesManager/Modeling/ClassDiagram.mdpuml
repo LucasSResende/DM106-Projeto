@@ -1,0 +1,44 @@
+﻿@startuml
+
+title Class Diagram - SeriesManage
+
+class Serie {
+    -string serieName
+    -string genre
+    -string description
+    +AddSeries(string serieName, string genre, string description)
+    +GetSeries(string serieName)
+    +UpdateSeries(string serieName, string genre, string description)
+    +DeleteSeries(string serieName)
+    +getSerieName()
+    +getGenre()
+    +getDescription()
+    +AddEpisodes(int episodeNumber, string episodeName)
+}
+
+class Platform {
+    -string platformName
+    -string SerieName
+    -string description
+    +AddPlatform(string platformName)
+    +AddSerie(string seriesName)
+    +RemoveSerie(string seriesName)
+    +GetSerieName()
+    +GetDescription()
+}
+
+class Episode {
+    -int episodeNumber
+    -string EpisodeName
+    +AddEpisode(int episodeNumber, string episodeName)
+    +GetEpisodes(int episodeNumber)
+    +UpdateEpisode(int episodeNumber)
+    +DeleteEpisode(int episodeNumber)
+    +GetEpisodeNumber()
+    +GetEpisodeName()
+}
+
+Serie "1" --> "*" Episode
+Serie "*" <--> "*" Platform
+
+@enduml
