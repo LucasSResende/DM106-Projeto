@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeriesManager_Console
 {
-    internal class Episode
+    public class Episode
     {
         public Episode(int episodeNumber, string episodeName)
         {

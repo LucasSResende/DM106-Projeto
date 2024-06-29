@@ -1,4 +1,9 @@
-﻿using SeriesManager_Console;
+﻿using HeroWiki.Shared.Data.DB;
+using SerieManager.Shared.Data.BD;
+using SeriesManager_Console;
+
+
+var SerieDAL = new SerieDAL(new SerieManagerContext());
 
 Dictionary<string, Serie> SerieDict = new();
 
@@ -50,11 +55,11 @@ void SerieRegister()
     Console.WriteLine("Digite o nome da série: ");
     string serieName = Console.ReadLine();
     Console.WriteLine("Digite o gênero da série");
-    string genre = Console.ReadLine();
+    string serieGenre = Console.ReadLine();
     Console.WriteLine("Faça uma breve descrição da série");
-    string description = Console.ReadLine();
-    Serie serie = new Serie(serieName, genre, description);
-    SerieDict.Add(serieName, serie);
+    string serieDescription = Console.ReadLine();
+    Serie serie = new Serie(serieName, serieGenre, serieDescription);
+    SerieDAL.Create(serie);
     Console.WriteLine($"Série {serieName} inserida!");
 }
 void EpisodeRegister()
@@ -83,16 +88,9 @@ void SerieGet()
 {
     Console.Clear();
     Console.WriteLine("Listagem de episódios\n");
-    Console.WriteLine("Digite o nome da série que pretende ver os episódios: ");
-    string serieName = Console.ReadLine();
-    if (SerieDict.ContainsKey(serieName))
+    foreach (var serie in SerieDAL.Read())
     {
-        Serie serie = SerieDict[serieName];
-        serie.ShowEpisodes();
-    }
-    else
-    {
-        Console.WriteLine($"Série {serieName} não encontrada.");
+        Console.WriteLine(serie);
     }
 }
 
@@ -100,22 +98,8 @@ void EpisodeGet()
 {
     Console.Clear();
     Console.WriteLine("Listagem de séries\n");
-    foreach (var seire in SerieDict.Values)
+    foreach (var serie in SerieDict.Values)
     {
-        Console.WriteLine(seire);
+        Console.WriteLine(serie);
     }
 }
-
-
-
-
-
-//using SeriesManager_Console;
-
-//Serie s1 = new Serie("GoT", "Aventura", "Esta série passada na idade média, fala sobre a época da monarquia e como funcionava algumas tramas de poder, envolvendo fantasia, como dragões.");
-
-//s1.AddEpisode(new Episode(1, "Pilot"));
-
-//Console.WriteLine(s1);
-
-//s1.ShowEpisodes();
