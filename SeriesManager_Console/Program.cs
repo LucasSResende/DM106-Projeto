@@ -1,9 +1,8 @@
-﻿using HeroWiki.Shared.Data.DB;
-using SerieManager.Shared.Data.BD;
+﻿using SerieManager.Shared.Data.BD;
 using SeriesManager_Console;
 
 
-var SerieDAL = new SerieDAL(new SerieManagerContext());
+var SerieDAL = new DAL<Serie> (new SerieManagerContext());
 
 Dictionary<string, Serie> SerieDict = new();
 
@@ -68,13 +67,14 @@ void EpisodeRegister()
     Console.WriteLine("Registro de episódio\n");
     Console.WriteLine("Digite o nome da série: ");
     string serieName = Console.ReadLine();
-    if (SerieDict.ContainsKey(serieName))
+    var targetSerie = SerieDAL.ReadBy(s => s.serieName.Equals(serieName));
+    if (targetSerie is not null)
     {
         Console.WriteLine($"Qual é o número e o nome do episódio da série {serieName}?");
         int episodeNumber = int.Parse(Console.ReadLine());
         string episodeName = Console.ReadLine();
-        Serie serie = SerieDict[serieName];
-        serie.AddEpisode(new Episode(episodeNumber, episodeName));
+        targetSerie.AddEpisode(new Episode(episodeNumber, episodeName));
+        SerieDAL.Update(targetSerie);
         Console.WriteLine($"O espisódio de número {episodeNumber} e nome {episodeName}" +
             $"foi registrado com sucesso!");
     }
@@ -87,19 +87,32 @@ void EpisodeRegister()
 void SerieGet()
 {
     Console.Clear();
-    Console.WriteLine("Listagem de episódios\n");
+    Console.WriteLine("Listagem de séries\n");
     foreach (var serie in SerieDAL.Read())
     {
         Console.WriteLine(serie);
     }
+    Console.ReadKey();
 }
 
 void EpisodeGet()
 {
     Console.Clear();
-    Console.WriteLine("Listagem de séries\n");
-    foreach (var serie in SerieDict.Values)
+    Console.WriteLine("Listagem de episódios\n");
+    Console.WriteLine("Entre com a série que deseja ver os episódios: ");
+    string serieName = Console.ReadLine();
+    var targetSerie = SerieDAL.ReadBy(s => s.serieName.Equals(serieName));
+    if (targetSerie is not null)
     {
-        Console.WriteLine(serie);
+        targetSerie.ShowEpisodes();
+        //targetSerie.Episodes = new List<Episode>();
+        //foreach(var episode in targetSerie.Episodes)
+        //{
+        //    Console.WriteLine(episode);
+        //}
     }
+    else Console.WriteLine($"Série {serieName} não encontrada.");
+    Console.ReadKey();
+
+
 }

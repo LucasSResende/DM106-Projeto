@@ -20,17 +20,16 @@ namespace SeriesManager_Console
         public string serieGenre { get; set; }
         public string serieDescription { get; set; }
 
-        public List<Episode> episodes = new List<Episode>();
+        public virtual ICollection<Episode> Episodes { get; set; } = new List<Episode>();
 
         public void AddEpisode(Episode episode)
-        {
-            episodes.Add(episode);
+        {            Episodes.Add(episode);
         }
 
         public void ShowEpisodes()
         {
-            Console.WriteLine($"Nome dos Episódios {serieName}:");
-            foreach (var episode in episodes)
+            Console.WriteLine($"Nome dos Episódios de {serieName}:");
+            foreach (var episode in Episodes)
             {
                 Console.WriteLine(episode);
             }

@@ -10,17 +10,20 @@ namespace SeriesManager_Console
     {
         public Episode(int episodeNumber, string episodeName)
         {
-            EpisodeNumber = episodeNumber;
-            EpisodeName = episodeName;
+            this.EpisodeNumber = episodeNumber;
+            this.EpisodeName = episodeName;
         }
+        public int Id { get; set; }
 
         public int EpisodeNumber { get; set; }
 
         public string EpisodeName { get; set; }
+        public virtual Serie? Serie { get; set; }
+
 
         public override string ToString()
         {
-            return $@"EP n°: {EpisodeNumber}" + Environment.NewLine +
+            return $@"Ep n°: {EpisodeNumber}" + Environment.NewLine +
                 $@"Nome do episódio: {EpisodeName}";
         }
 
