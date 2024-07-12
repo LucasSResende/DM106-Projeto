@@ -18,6 +18,13 @@ namespace SeriesManager.EndPoints
                 return Results.Ok(serieResponseList);
             });
 
+            app.MapGet("/Series/{id}", ([FromServices] DAL<Serie> dal, int id) =>
+            {
+                var serie = dal.ReadBy(s => s.Id == id);
+                if (serie is null) return Results.NotFound();
+                return Results.Ok(EntityToResponse(serie));
+            });
+
             app.MapPost("/Series", ([FromBody] SerieRequest serieRequest, [FromServices] DAL<Serie> dal) =>
             {
                 var serie = new Serie(serieRequest.serieName, serieRequest.serieGenre, serieRequest.serieDescription);

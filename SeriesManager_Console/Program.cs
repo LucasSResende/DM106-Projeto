@@ -105,11 +105,6 @@ void EpisodeGet()
     if (targetSerie is not null)
     {
         targetSerie.ShowEpisodes();
-        //targetSerie.Episodes = new List<Episode>();
-        //foreach(var episode in targetSerie.Episodes)
-        //{
-        //    Console.WriteLine(episode);
-        //}
     }
     else Console.WriteLine($"Série {serieName} não encontrada.");
     Console.ReadKey();

@@ -12,7 +12,10 @@ namespace SeriesManager.EndPoints
         {
             app.MapGet("/Episodes", ([FromServices] DAL<Episode> dalEp) =>
             {
-                return Results.Ok(dalEp.Read());
+                var episodeList = dalEp.Read();
+            if (episodeList is null) return Results.NotFound();
+            var episodeResponseList = EntityListToResponseList(episodeList);
+            return Results.Ok(episodeResponseList);
             });
 
             app.MapPost("/Episodes", ([FromBody] EpisodeRequest episodeRequest, [FromServices] DAL<Episode> dalEp) =>
