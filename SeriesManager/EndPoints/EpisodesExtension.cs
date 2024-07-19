@@ -10,7 +10,9 @@ namespace SeriesManager.EndPoints
     {
         public static void AddEndPointsEpisode(this WebApplication app)
         {
-            app.MapGet("/Episodes", ([FromServices] DAL<Episode> dalEp) =>
+            var groupBuilder = app.MapGroup("episodes").RequireAuthorization().WithTags("Episode");
+
+            groupBuilder.MapGet("", ([FromServices] DAL<Episode> dalEp) =>
             {
                 var episodeList = dalEp.Read();
             if (episodeList is null) return Results.NotFound();
@@ -18,13 +20,13 @@ namespace SeriesManager.EndPoints
             return Results.Ok(episodeResponseList);
             });
 
-            app.MapPost("/Episodes", ([FromBody] EpisodeRequest episodeRequest, [FromServices] DAL<Episode> dalEp) =>
+            groupBuilder.MapPost("", ([FromBody] EpisodeRequest episodeRequest, [FromServices] DAL<Episode> dalEp) =>
             {
                 dalEp.Create(new Episode(episodeRequest.EpisodeNumber, episodeRequest.EpisodeName));
                 return Results.Ok();
             });
 
-            app.MapDelete("/Episodes/{id}", ([FromServices] DAL<Episode> dalEp, int id) =>
+            groupBuilder.MapDelete("/{id}", ([FromServices] DAL<Episode> dalEp, int id) =>
             {
                 var episode = dalEp.ReadBy(e => e.Id == id);
                 if (episode is null) return Results.NotFound();
@@ -32,7 +34,7 @@ namespace SeriesManager.EndPoints
                 return Results.NoContent();
             });
 
-            app.MapPut("/Episodes", ([FromServices] DAL<Episode> dalEp, [FromBody] EpisodeEditRequest episodeRequest) =>
+            groupBuilder.MapPut("", ([FromServices] DAL<Episode> dalEp, [FromBody] EpisodeEditRequest episodeRequest) =>
             {
                 var episodeToEdit = dalEp.ReadBy(e => e.Id == episodeRequest.id);
                 if (episodeToEdit is null) return Results.NotFound();

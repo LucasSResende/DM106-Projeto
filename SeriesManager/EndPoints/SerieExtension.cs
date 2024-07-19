@@ -10,7 +10,9 @@ namespace SeriesManager.EndPoints
     {
         public static void AddEndPointsSerie(this WebApplication app)
         {
-            app.MapGet("/Series", ([FromServices] DAL<Serie> dal) =>
+            var groupBuilder = app.MapGroup("series").RequireAuthorization().WithTags("Serie");
+
+            groupBuilder.MapGet("", ([FromServices] DAL<Serie> dal) =>
             {
                 var serieList = dal.Read();
                 if (serieList is null) return Results.NotFound();
@@ -18,21 +20,26 @@ namespace SeriesManager.EndPoints
                 return Results.Ok(serieResponseList);
             });
 
-            app.MapGet("/Series/{id}", ([FromServices] DAL<Serie> dal, int id) =>
+            groupBuilder.MapGet("/{id}", ([FromServices] DAL<Serie> dal, int id) =>
             {
                 var serie = dal.ReadBy(s => s.Id == id);
                 if (serie is null) return Results.NotFound();
                 return Results.Ok(EntityToResponse(serie));
             });
 
-            app.MapPost("/Series", ([FromBody] SerieRequest serieRequest, [FromServices] DAL<Serie> dal) =>
+            groupBuilder.MapPost("", ([FromServices] DAL<Serie> dal, [FromServices] DAL<Platform> dalPlatform, [FromBody] SerieRequest serieRequest) =>
             {
-                var serie = new Serie(serieRequest.serieName, serieRequest.serieGenre, serieRequest.serieDescription);
+                var serie = new Serie(serieRequest.serieName, serieRequest.serieGenre, serieRequest.serieDescription)
+                {
+                    Platforms = serieRequest.Platforms is not null ?
+                    PlatformRequestConverter(serieRequest.Platforms, dalPlatform) :
+                    new List<Platform>()
+                };
                 dal.Create(serie);
                 return Results.Ok();
             });
 
-            app.MapDelete("/Series/{id}", ([FromServices] DAL<Serie> dal, int id) =>
+            groupBuilder.MapDelete("/{id}", ([FromServices] DAL<Serie> dal, int id) =>
             {
                 var serie = dal.ReadBy(s => s.Id == id);
                 if (serie is null) return Results.NotFound();
@@ -40,7 +47,7 @@ namespace SeriesManager.EndPoints
                 return Results.NoContent();
             });
 
-            app.MapPut("/Series", ([FromServices] DAL<Serie> dal, [FromBody] SerieEditRequest serieRequest) =>
+            groupBuilder.MapPut("", ([FromServices] DAL<Serie> dal, [FromBody] SerieEditRequest serieRequest) =>
             {
                 var serieToEdit = dal.ReadBy(s => s.Id == serieRequest.id);
                 if (serieToEdit is null) return Results.NotFound();
@@ -59,6 +66,23 @@ namespace SeriesManager.EndPoints
         private static SerieResponse EntityToResponse(Serie serie)
         {
             return new SerieResponse(serie.Id, serie.serieName, serie.serieGenre, serie.serieDescription);
+        }
+
+        private static ICollection<Platform> PlatformRequestConverter(ICollection<PlatformRequest> platforms, DAL<Platform> dalPlatform)
+        {
+            var platformList = new List<Platform>();
+            foreach (var platform in platforms)
+            {
+                var entity = RequestToEntity(platform);
+                var plat = dalPlatform.ReadBy(p => p.platformName.ToUpper().Equals(entity.platformName.ToUpper()));
+                if (plat is not null) platformList.Add(plat);
+                else platformList.Add(entity);
+            }
+                return platformList;
+        }
+        private static Platform RequestToEntity(PlatformRequest p)
+        {
+            return new Platform() { platformName = p.platformName };
         }
     }
 }

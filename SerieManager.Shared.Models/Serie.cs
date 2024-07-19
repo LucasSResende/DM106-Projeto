@@ -21,6 +21,7 @@ namespace SeriesManager_Console
         public string serieDescription { get; set; }
 
         public virtual ICollection<Episode> Episodes { get; set; } = new List<Episode>();
+        public virtual ICollection<Platform> Platforms { get; set; } = new List<Platform>();
 
         public void AddEpisode(Episode episode)
         {            Episodes.Add(episode);

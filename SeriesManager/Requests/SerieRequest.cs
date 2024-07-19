@@ -1,4 +1,4 @@
 ﻿namespace SeriesManager.Requests
 {
-    public record SerieRequest(string serieName, string serieGenre, string serieDescription);
+    public record SerieRequest(string serieName, string serieGenre, string serieDescription, ICollection<PlatformRequest> Platforms = null);
 }
