@@ -23,21 +23,6 @@ namespace SeriesManager_Console
 
         public virtual ICollection<Serie> Series { get; set; }
 
-        //public void AddSeries(Serie serie)
-        //{
-        //    Series.Add(serie);
-        //}
-
-        //public void ShowSeries()
-
-        //{
-        //    Console.WriteLine($"Nome das Séries da plataforma {platformName}:");
-        //    foreach (var serie in Series)
-        //    {
-        //        Console.WriteLine(serie);
-        //    }
-        //}
-
         public override string ToString()
         {
             return $@"Id: {Id}" + Environment.NewLine

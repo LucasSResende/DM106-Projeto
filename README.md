@@ -56,7 +56,7 @@ The following tools were used in the construction of the project:
 
 <p align="center">
   <img alt="ClassDiagram" style="width: 700px; margin: 0 10px" 
-       src="SeriesManager/Modeling/ClassDiagram.jpg">
+       src="SeriesManager\Modeling\ClassDiagram.jpg">
 </p>
 
 ---

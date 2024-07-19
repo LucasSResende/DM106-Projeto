@@ -3,39 +3,35 @@
 title Class Diagram - SeriesManage
 
 class Serie {
+    -int Id
     -string serieName
     -string serieGenre
     -string serieDescription
-    +AddSeries(string serieName, string serieGenre, string serieDescription)
-    +GetSeries(string serieName)
+    +AddSeries(string serieName, string serieGenre, string serieDescription, string platformName[])
+    +GetSeries()
+    +GetSeries(int Id)
     +UpdateSeries(string serieName, string serieGenre, string serieDescription)
-    +DeleteSeries(string serieName)
-    +getSerieName()
-    +getGenre()
-    +getserieDescription()
+    +DeleteSeries(int Id)
     +AddEpisodes(int episodeNumber, string episodeName)
+    +AddPlatform(string platformName)
 }
 
 class Platform {
+    -int Id
     -string platformName
-    -string SerieName
-    -string serieDescription
-    +AddPlatform(string platformName)
-    +AddSerie(string seriesName)
-    +RemoveSerie(string seriesName)
-    +GetSerieName()
-    +GetserieDescription()
+    +GetPlatform()
+    +PostPlatform(string platformName)
+    +DeletePlatform(int Id)
 }
 
 class Episode {
+    -int Id
     -int episodeNumber
     -string EpisodeName
     +AddEpisode(int episodeNumber, string episodeName)
-    +GetEpisodes(int episodeNumber)
-    +UpdateEpisode(int episodeNumber)
-    +DeleteEpisode(int episodeNumber)
-    +GetEpisodeNumber()
-    +GetEpisodeName()
+    +GetEpisodes()
+    +UpdateEpisode(int episodeNumber, string episodeName)
+    +DeleteEpisode(int Id)
 }
 
 Serie "1" --> "*" Episode
