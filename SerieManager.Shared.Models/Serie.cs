@@ -22,9 +22,12 @@ namespace SeriesManager_Console
 
         public virtual ICollection<Episode> Episodes { get; set; } = new List<Episode>();
         public virtual ICollection<Platform> Platforms { get; set; } = new List<Platform>();
+        public virtual ICollection<Country> Countries { get; set; } = new List<Country>();
+
 
         public void AddEpisode(Episode episode)
-        {            Episodes.Add(episode);
+        {
+            Episodes.Add(episode);
         }
 
         public void ShowEpisodes()

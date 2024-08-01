@@ -7,13 +7,15 @@ class Serie {
     -string serieName
     -string serieGenre
     -string serieDescription
-    +AddSeries(string serieName, string serieGenre, string serieDescription, string platformName[])
+    +PostSeries(string serieName, 
+        string serieGenre, string serieDescription, 
+        string Platform [platformName],string Country [countryName, language] )
     +GetSeries()
     +GetSeries(int Id)
+    +GetSeries(Platforms/int Id)
     +UpdateSeries(string serieName, string serieGenre, string serieDescription)
     +DeleteSeries(int Id)
-    +AddEpisodes(int episodeNumber, string episodeName)
-    +AddPlatform(string platformName)
+    +PostPlatform(string platformName)
 }
 
 class Platform {
@@ -28,13 +30,23 @@ class Episode {
     -int Id
     -int episodeNumber
     -string EpisodeName
-    +AddEpisode(int episodeNumber, string episodeName)
+    +PostEpisode(int episodeNumber, string episodeName)
     +GetEpisodes()
     +UpdateEpisode(int episodeNumber, string episodeName)
+    +DeleteEpisode(int Id)
+}
+class Country {
+    -int Id
+    -string countryName
+    -string language
+    +PostCountry(string countryName, string language)
+    +GetCountry()
+    +UpdateCountry(string countryName, string language)
     +DeleteEpisode(int Id)
 }
 
 Serie "1" --> "*" Episode
 Serie "*" <--> "*" Platform
+Serie "*" <--> "*" Country
 
 @enduml

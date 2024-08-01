@@ -18,6 +18,7 @@ namespace SerieManager.Shared.Data.BD
         public DbSet<Serie> Serie{ get; set; }
         public DbSet<Episode> Episode{ get; set; }
         public DbSet<Platform> Platform { get; set; }
+        public DbSet<Country> Country { get; set; }
 
 
         private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;" +
@@ -32,6 +33,7 @@ namespace SerieManager.Shared.Data.BD
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Serie>().HasMany(p => p.Platforms).WithMany(s => s.Series);
+            modelBuilder.Entity<Serie>().HasMany(c => c.Countries).WithMany(s => s.Series);
         }
     }
 }

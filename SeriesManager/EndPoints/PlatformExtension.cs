@@ -20,7 +20,8 @@ namespace SerieManager.EndPoints
                 return Results.Ok(platformResponseList);
             });
 
-            groupBuilder.MapPost("", ([FromServices] DAL<Platform> dal, [FromBody] PlatformRequest platformRequest) =>
+            groupBuilder.MapPost("", ([FromServices] DAL<Platform> dal, 
+                [FromBody] PlatformRequest platformRequest) =>
             {
                 dal.Create(RequestToEntity(platformRequest));
                 return Results.Ok();

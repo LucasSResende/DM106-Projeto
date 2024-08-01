@@ -1,4 +1,4 @@
-﻿<h1 align="center">Series Manager</h1>
+﻿<h1 align="center">Series Manager System</h1>
 
 ## 🎓 About Project
 
@@ -33,6 +33,8 @@ The following tools were used in the construction of the project:
 
 ![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 
+![Azure](https://img.shields.io/badge/Azure_DevOps-0078D7?style=for-the-badge&logo=azure-devops&logoColor=white)
+
 ### Tools
 
 - Visual Studio
@@ -48,6 +50,8 @@ The following tools were used in the construction of the project:
 
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)
 
+![Azure](https://img.shields.io/badge/Azure_DevOps-0078D7?style=for-the-badge&logo=azure-devops&logoColor=white)
+
 ## 📁 Diagram
 
 ### Class Diagram
@@ -61,6 +65,20 @@ The following tools were used in the construction of the project:
 
 ---
 
+# ⚒️ Installation
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/LucasSResende/DM106-Projeto.git
+    cd DM106-Projeto
+    ```
+
+2. Update the configuration files with your database settings.
+
+3. Run the application:
+    ```bash
+    dotnet run
+    ```
 ## Author
 
 <table>

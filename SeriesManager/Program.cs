@@ -24,6 +24,7 @@ builder.Services.AddDbContext<SerieManagerContext>();
 builder.Services.AddTransient<DAL<Serie>>();
 builder.Services.AddTransient<DAL<Episode>>();
 builder.Services.AddTransient<DAL<Platform>>();
+builder.Services.AddTransient<DAL<Country>>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -35,6 +36,7 @@ app.UseAuthorization();
 app.AddEndPointsSerie();
 app.AddEndPointsEpisode();
 app.AddEndPointsPlatform();
+app.AddEndPointsCountry();
 
 app.MapGroup("auth").MapIdentityApi<AccessUser>()
     .WithTags("Authorization");
