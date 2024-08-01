@@ -21,10 +21,9 @@ namespace SerieManager.Shared.Data.BD
         public DbSet<Country> Country { get; set; }
 
 
-        private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;" +
-            "Initial Catalog=SerieManager_BD_V0;Integrated Security=True;" +
-            "Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;" +
-            "Application Intent=ReadWrite;Multi Subnet Failover=False";
+        private string connectionString = "Server=tcp:seriesmanagerserver.database.windows.net,1433;" +
+            "Initial Catalog=SerieManager_BD_V0;Persist Security Info=False;User ID=serieserver;" +
+            "Password=Senh@100;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();

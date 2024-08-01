@@ -79,6 +79,16 @@ The following tools were used in the construction of the project:
     ```bash
     dotnet run
     ```
+
+## Excluding Azure Server 
+
+- Server deletion proof print
+<p align="center">
+  <img alt="ClassDiagram" style="width: 700px; margin: 0 10px" 
+       src="SeriesManager\Modeling\ServidorExcluido.jpg">
+</p>
+
+
 ## Author
 
 <table>
